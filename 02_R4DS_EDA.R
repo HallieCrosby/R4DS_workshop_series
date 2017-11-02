@@ -14,7 +14,8 @@
 # common to use both ggplot2 and dplyr when exploring data
 library(tidyverse)
 
-
+dplyer::filter()
+dplyer::lag()
 ##########VISUALIZE DISTRIBUTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -27,8 +28,7 @@ ggplot(data = diamonds)+
 
 # for CONTINUOUS VAR
 ggplot(data=diamonds)+
-  geom_histogram(mapping = aes(x=carat), binwidth = 0.5) # try adjusting the bindwidth here, what does it do?
-
+  geom_histogram(mapping = aes(x=carat), binwidth = 0.1) # try adjusting the bindwidth here, what does it do?
 
 
 
@@ -65,6 +65,8 @@ ggplot(diamonds)+
 ggplot(diamonds)+
   geom_histogram(aes(x=y), binwidth = 0.5)+
   coord_cartesian(ylim=c(0,50))
+  #xlim(30,40)  
+  #Can also use this xlim instead of cartesian
 #there they are!!!
 
 
@@ -81,18 +83,12 @@ ggplot(diamonds, aes(price))+
 
 
 
-
 # how could we look at these unusual values with dplyr??? TRY THAT HERE:
 
 
-
-
-
-
-
-
-
-
+#looking at values that look weird
+weird<-diamonds%>%
+  filter(price>17000)
 
 
 
@@ -174,7 +170,7 @@ diamonds%>%
 # out good friend the scatter plot!!
 
 ggplot(data=diamonds)+
-  geom_point(aes(x=carat, y=price))
+  geom_point(aes(x=carat, y=price, colour=cut))
 
 # whats up with the 5 carat diamond that is as expensive as many 1-3 carat diamonds?
 # what could we add to the above plot to help figure this out?
